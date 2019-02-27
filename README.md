@@ -1,5 +1,7 @@
 # Validation [![Build Status](https://travis-ci.org/nimashoghi/Validation.svg?branch=master)](https://travis-ci.org/nimashoghi/Validation)
 
+[![Nuget](https://img.shields.io/nuget/v/FSValidation.svg?style=for-the-badge)](https://www.nuget.org/packages/FSValidation)
+
 ## Example Usage
 
 First, we create some basic validation functions using the existing `Result<_, _>` type in F#.
