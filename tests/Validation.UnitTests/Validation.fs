@@ -19,6 +19,9 @@ let ``mapError failure`` () = Validation.mapError (List.map ((+) 2)) (Error [1; 
 let ``apply success`` () = Validation.apply (Ok ((+) 2)) (Ok 1) =! Ok 3
 
 [<Test>]
+let ``apply failure left`` () = Validation.apply (Error ["test"]) (Ok 1) =! Error ["test"]
+
+[<Test>]
 let ``apply failure right`` () = Validation.apply (Ok ((+) 2)) (Error ["test"]) =! Error ["test"]
 
 [<Test>]
@@ -136,6 +139,12 @@ let ``contains success`` () = Validation.contains 1 (Ok 1) =! true
 
 [<Test>]
 let ``contains failure`` () = Validation.contains 1 (Error ["myError"]) =! false
+
+[<Test>]
+let ``flatten success`` () = Validation.flatten (Ok (Ok 1)) =! Ok 1
+
+[<Test>]
+let ``flatten failure`` () = Validation.flatten (Ok (Error ["myError"])) =! Error ["myError"]
 
 [<Test>]
 let ``defaultValue default ok underlying ok`` () = Validation.defaultValue (Ok 1) (Ok 2) =! Ok 2

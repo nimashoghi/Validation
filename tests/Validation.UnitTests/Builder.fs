@@ -84,3 +84,57 @@ let ``nested failure multiple`` () =
                 w = w
             |}
     } =! Error ["hello"; "world"]
+
+[<Test>]
+let ``returnFrom nested success multiple`` () =
+    let f () =
+        validation {
+            validate v in Ok 1
+            return v
+        }
+    let g () =
+        validation {
+            validate v in Ok "hello world"
+            return v
+        }
+    let k () =
+        validation {
+            validate v in f ()
+            validate w in g ()
+            return
+                {|
+                    v = v
+                    w = w
+                |}
+        }
+
+    validation {
+        return! k ()
+    } =! Ok {|v = 1; w = "hello world"|}
+
+[<Test>]
+let ``returnFrom nested failure multiple`` () =
+    let f () =
+        validation {
+            validate v in Error ["hello"]
+            return v
+        }
+    let g () =
+        validation {
+            validate v in Error ["world"]
+            return v
+        }
+    let k () =
+        validation {
+            validate v in f ()
+            validate w in g ()
+            return
+                {|
+                    v = v
+                    w = w
+                |}
+        }
+
+    validation {
+        return! k ()
+    } =! Error ["hello"; "world"]
