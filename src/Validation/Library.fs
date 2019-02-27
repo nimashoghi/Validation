@@ -138,12 +138,31 @@ module Validation =
         open Operators
 
         type ValidationBuilder<'error> () =
+            member __.Zero () = Error []
             member __.Yield (_: unit): Validation<_, 'error> = Ok (unbox<_> null)
+
             member __.For (x: Validation<'value, 'error>, f: 'value -> Validation<_, 'error>) = bind f x
+            member __.Combine (m: Validation<'value, 'error>, f: unit -> Validation<'value, 'error>): Validation<'value, 'error> =
+                match m, f () with
+                | Ok value, Error [] -> Ok value
+                | Error [], Ok value -> Ok value
+                | Ok value, Ok _ -> Ok value
+                | Error xs, Error ys -> Error (xs @ ys)
+                | _, Error ys -> Error ys
+                | Error xs, _ -> Error xs
+
             [<CustomOperation ("validate", IsLikeZip = true)>]
             member __.Validate (outer: Validation<'outer, 'error>, inner: Validation<'inner, 'error>, f: 'outer -> 'inner -> 'result): Validation<'result, 'error> =
                 f <!> outer <*> inner
+
+            member __.Yield (x: 'error): Validation<'value, 'error> = Error [x]
+            member __.YieldFrom (xs: 'error list): Validation<'value, 'error> = Error xs
+            member __.YieldFrom (x:  Validation<_, 'error>) = x
+
             member __.Return (x: 'value): Validation<'value, 'error> = Ok x
             member __.ReturnFrom (x:  Validation<_, 'error>) = x
+
+            member __.Delay x = x
+            member __.Run x = x ()
 
         let validation<'error> = ValidationBuilder<'error> ()

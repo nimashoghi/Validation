@@ -138,3 +138,27 @@ let ``returnFrom nested failure multiple`` () =
     validation {
         return! k ()
     } =! Error ["hello"; "world"]
+
+[<Test>]
+let ``Zero`` () =
+    validation {
+        ()
+    } =! Error []
+
+[<Test>]
+let ``yield`` () =
+    validation {
+        yield "Hello world"
+    } =! Error ["Hello world"]
+
+[<Test>]
+let ``yieldFrom`` () =
+    validation {
+        yield! ["Hello world"]
+    } =! Error ["Hello world"]
+
+[<Test>]
+let ``yieldFrom Result`` () =
+    validation {
+        yield! Error ["Hello world"]
+    } =! Error ["Hello world"]
