@@ -52,4 +52,46 @@ let validate (data: Data) =
     }
 ```
 
-Take a look at sample.fsx or our unit tests for more examples.
+We can now call our `validate` method:
+
+```fs
+validate {
+    Age = 21
+    Height = 180.
+    Name = "Alice"
+    NotValidated = "hello"
+}
+```
+
+which will give us the following output:
+
+```fs
+Ok ({
+    Age = 21
+    Height = 180.
+    Name = "Alice"
+    NotValidated = "hello"
+})
+```
+
+If we can `validate` with invalid data:
+
+```fs
+validate {
+    Age = 20
+    Height = 180.
+    Name = "Bob"
+    NotValidated = "hello"
+}
+```
+
+we get the following result:
+
+```fs
+Error [
+    "Invalid Age"
+    "Invalid Name"
+]
+```
+
+Take a look at `sample.fsx` or our unit tests for more examples.
