@@ -3,6 +3,8 @@ module Validation.UnitTests.Validation
 open NUnit.Framework
 open Swensen.Unquote
 
+open Validation
+
 [<Test>]
 let ``map success`` () = Validation.map ((+) 2) (Ok 1) =! Ok 3
 

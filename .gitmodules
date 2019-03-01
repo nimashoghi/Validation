@@ -1,0 +1,3 @@
+[submodule "dependencies/FSharp.Utils"]
+	path = dependencies/FSharp.Utils
+	url = https://github.com/nimashoghi/FSharp.Utils.git

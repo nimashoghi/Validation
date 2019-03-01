@@ -4,13 +4,20 @@
     <PackageId>FSValidation</PackageId>
     <Title>FSValidation</Title>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <Compile Include="Result.fs" />
+    <Compile Include="AsyncResult.fs" />
+    <Compile Include="Operators.fs" />
+    <Compile Include="Builder.fs" />
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\FSharp.Utils\src\FSharp.Utils\FSharp.Utils.fsproj" />
   </ItemGroup>
 
 </Project>

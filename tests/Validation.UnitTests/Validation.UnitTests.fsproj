@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <Compile Include="Validation.fs" />
-    <Compile Include="Operators.fs" />
+    <Compile Include="AsyncOperators.fs" />
+    <Compile Include="SyncOperators.fs" />
     <Compile Include="Builder.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

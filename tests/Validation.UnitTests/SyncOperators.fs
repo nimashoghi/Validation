@@ -1,9 +1,9 @@
-module Validation.UnitTests.Operators
+module Validation.UnitTests.SyncOperators
 
 open NUnit.Framework
 open Swensen.Unquote
 
-open Validation.Operators
+open Validation.Operators.Validation
 
 [<Test>]
 let ``map success`` () = ((+) 2) <!> Ok 1 =! Ok 3
