@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\dependencies\FSharp.Utils\src\FSharp.Utils\FSharp.Utils.fsproj" />
+    <PackageReference Include="FSharp.Utils" Version="0.0.1" />
   </ItemGroup>
 
 </Project>

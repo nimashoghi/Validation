@@ -1,7 +1,7 @@
 module Validation.AsyncValidation
 
 open System.Threading.Tasks
-open FSharp.Utils.Tasks
+open FSharp.Utils
 
 /// **Description**
 ///     Applies the function `f` to the value inside container `x`.
