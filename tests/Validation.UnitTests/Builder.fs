@@ -6,7 +6,7 @@ open Swensen.Unquote
 
 open Validation.Builder
 
-let (=!!) (lhs: 'value Task) (rhs: 'value) =
+let (=!!) (lhs: 'value ValueTask) (rhs: 'value) =
     lhs.Result =! rhs
 
 [<Test>]
@@ -148,6 +148,13 @@ let ``Zero`` () =
     validation {
         ()
     } =!! Error []
+
+[<Test>]
+let ``ValueTask support`` () =
+    validation {
+        validate a in ValueTask<_> (Ok 1)
+        return a
+    } =!! Ok 1
 
 // [<Test>]
 // let ``yield`` () =
