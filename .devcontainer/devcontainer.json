@@ -1,9 +1,5 @@
 {
     "name": "F#",
     "dockerFile": "Dockerfile",
-    "extensions": [
-        "ionide.ionide-fsharp",
-        "ms-vscode.csharp",
-        "ms-vscode.powershell"
-    ]
+    "extensions": ["ionide.ionide-fsharp", "ms-vscode.csharp"]
 }
